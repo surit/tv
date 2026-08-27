@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prasaran — Nepali TV, Live</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #10121a;
+    --bg-soft: #171a24;
+    --surface: #1c2030;
+    --surface-hover: #242938;
+    --line: #2a2f42;
+    --text: #f2efe9;
+    --text-dim: #a7add0;
+    --text-faint: #6b7194;
+    --crimson: #e14a4f;
+    --crimson-dim: #7a2a2f;
+    --marigold: #e8a33d;
+    --indigo-glow: #4a5cc9;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(1200px 600px at 15% -10%, rgba(232,163,61,0.08), transparent 60%),
+      radial-gradient(1000px 500px at 100% 0%, rgba(74,92,201,0.10), transparent 55%),
+      var(--bg);
+    color:var(--text);
+    font-family:'IBM Plex Sans', sans-serif;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+  }
+
+  a{color:inherit;}
+
+  ::selection{background:var(--crimson); color:#fff;}
+
+  /* ---------- Header / Hero ---------- */
+  header.hero{
+    position:relative;
+    padding:56px 6vw 40px;
+    border-bottom:1px solid var(--line);
+    overflow:hidden;
+  }
+
+  .hero-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:24px;
+    flex-wrap:wrap;
+  }
+
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
+
+  .brand-mark{
+    width:44px;height:44px;
+    border-radius:9px;
+    background:
+      linear-gradient(135deg, var(--crimson) 0%, var(--crimson) 32%, var(--marigold) 33%, var(--marigold) 66%, var(--indigo-glow) 67%, var(--indigo-glow) 100%);
+    background-size: 100% 300%;
+    animation:mark-shift 6s ease-in-out infinite;
+    flex:none;
+  }
+
+  @keyframes mark-shift{
+    0%,100%{background-position:0 0;}
+    50%{background-position:0 100%;}
+  }
+
+  .brand-name{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:22px;
+    letter-spacing:0.01em;
+  }
+
+  .brand-sub{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--text-faint);
+    text-transform:uppercase;
+    letter-spacing:0.14em;
+    margin-top:2px;
+  }
+
+  .hero-meta{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--text-faint);
+    text-align:right;
+    line-height:1.7;
+  }
+  .hero-meta strong{color:var(--marigold); font-weight:500;}
+
+  .hero-headline{
+    margin:52px 0 0;
+    display:flex;
+    align-items:baseline;
+    gap:22px;
+    flex-wrap:wrap;
+  }
+
+  .hero-count{
+    font-family:'Fraunces', serif;
+    font-weight:700;
+    font-size:clamp(64px, 11vw, 140px);
+    line-height:0.85;
+    letter-spacing:-0.02em;
+    background:linear-gradient(180deg, #ffffff 0%, #c9cde0 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+
+  .hero-headline-text{
+    font-size:clamp(15px, 2vw, 19px);
+    color:var(--text-dim);
+    max-width:360px;
+    line-height:1.5;
+    padding-bottom:10px;
+  }
+  .hero-headline-text em{color:var(--text); font-style:normal; border-bottom:1px solid var(--crimson);}
+
+  /* ---------- Controls ---------- */
+  .controls{
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:rgba(16,18,26,0.88);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+    padding:16px 6vw;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+
+  .search-row{
+    display:flex;
+    gap:12px;
+    align-items:center;
+  }
+
+  .search-box{
+    flex:1;
+    position:relative;
+  }
+  .search-box svg{
+    position:absolute;
+    left:14px; top:50%;
+    transform:translateY(-50%);
+    width:16px;height:16px;
+    color:var(--text-faint);
+  }
+  .search-box input{
+    width:100%;
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:9px;
+    padding:11px 14px 11px 38px;
+    color:var(--text);
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:14px;
+    outline:none;
+    transition:border-color .15s ease, background .15s ease;
+  }
+  .search-box input:focus{border-color:var(--crimson); background:var(--surface-hover);}
+  .search-box input::placeholder{color:var(--text-faint);}
+
+  .result-count{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--text-faint);
+    white-space:nowrap;
+  }
+  .result-count strong{color:var(--text);}
+
+  .chips{
+    display:flex;
+    gap:8px;
+    overflow-x:auto;
+    padding-bottom:2px;
+    scrollbar-width:thin;
+  }
+  .chips::-webkit-scrollbar{height:4px;}
+  .chips::-webkit-scrollbar-thumb{background:var(--line); border-radius:4px;}
+
+  .chip{
+    flex:none;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.02em;
+    padding:7px 13px;
+    border-radius:100px;
+    border:1px solid var(--line);
+    background:transparent;
+    color:var(--text-dim);
+    cursor:pointer;
+    transition:all .15s ease;
+    white-space:nowrap;
+  }
+  .chip:hover{border-color:var(--text-faint); color:var(--text);}
+  .chip.active{
+    background:var(--crimson);
+    border-color:var(--crimson);
+    color:#fff;
+  }
+  .chip .n{opacity:0.65; margin-left:2px;}
+
+  /* ---------- Grid ---------- */
+  main{padding:32px 6vw 80px;}
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(168px, 1fr));
+    gap:14px;
+  }
+
+  .card{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:12px;
+    overflow:hidden;
+    cursor:pointer;
+    transition:transform .18s ease, border-color .18s ease, background .18s ease;
+    display:flex;
+    flex-direction:column;
+    animation:card-in .4s ease backwards;
+  }
+  @keyframes card-in{
+    from{opacity:0; transform:translateY(8px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+  .card:hover{
+    transform:translateY(-3px);
+    border-color:var(--crimson-dim);
+    background:var(--surface-hover);
+  }
+
+  .card-art{
+    aspect-ratio:16/10;
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:var(--bg-soft);
+    overflow:hidden;
+  }
+  .card-art img{
+    width:100%;height:100%;
+    object-fit:contain;
+    padding:14px;
+  }
+
+  /* SMPTE-style test-card fallback when a logo is missing/broken */
+  .testcard{
+    width:100%;height:100%;
+    display:flex;
+    flex-direction:column;
+  }
+  .testcard .bars{flex:1; display:flex;}
+  .testcard .bars span{flex:1;}
+  .testcard .initial{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:30px;
+    color:rgba(0,0,0,0.55);
+    mix-blend-mode:overlay;
+    text-shadow:0 1px 0 rgba(255,255,255,0.25);
+  }
+
+  .card-play{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(10,11,16,0);
+    opacity:0;
+    transition:opacity .15s ease, background .15s ease;
+  }
+  .card:hover .card-play{opacity:1; background:rgba(10,11,16,0.35);}
+  .card-play svg{width:34px;height:34px; color:#fff; filter:drop-shadow(0 2px 6px rgba(0,0,0,0.5));}
+
+  .card-body{
+    padding:10px 12px 12px;
+    border-top:1px solid var(--line);
+  }
+  .card-name{
+    font-size:13px;
+    font-weight:500;
+    line-height:1.3;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .card-cat{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10px;
+    color:var(--text-faint);
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    margin-top:4px;
+  }
+
+  .empty-state{
+    grid-column:1/-1;
+    text-align:center;
+    padding:80px 20px;
+    color:var(--text-faint);
+  }
+  .empty-state .big{
+    font-family:'Fraunces', serif;
+    font-size:22px;
+    color:var(--text-dim);
+    margin-bottom:6px;
+  }
+
+  /* ---------- Modal / Player ---------- */
+  .modal-backdrop{
+    position:fixed; inset:0;
+    background:rgba(8,9,13,0.82);
+    backdrop-filter:blur(4px);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:100;
+    padding:20px;
+  }
+  .modal-backdrop.open{display:flex;}
+
+  .modal{
+    width:min(880px, 100%);
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:14px;
+    overflow:hidden;
+  }
+
+  .modal-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:14px 18px;
+    border-bottom:1px solid var(--line);
+  }
+  .modal-title{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-weight:600;
+    font-size:15px;
+  }
+  .modal-title img{width:24px;height:24px;object-fit:contain;border-radius:4px;}
+  .modal-close{
+    background:none;
+    border:none;
+    color:var(--text-faint);
+    font-size:20px;
+    cursor:pointer;
+    line-height:1;
+    padding:4px 8px;
+  }
+  .modal-close:hover{color:var(--text);}
+
+  .modal-stage{
+    aspect-ratio:16/9;
+    background:#000;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+  }
+  .modal-stage video{width:100%;height:100%;}
+
+  .stage-msg{
+    color:var(--text-dim);
+    font-size:13px;
+    text-align:center;
+    padding:30px;
+    max-width:440px;
+    line-height:1.6;
+  }
+  .stage-msg .glyph{font-size:26px; margin-bottom:10px;}
+
+  .modal-actions{
+    display:flex;
+    gap:10px;
+    padding:14px 18px;
+    border-top:1px solid var(--line);
+    flex-wrap:wrap;
+  }
+  .btn{
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:13px;
+    font-weight:500;
+    padding:9px 15px;
+    border-radius:8px;
+    border:1px solid var(--line);
+    background:transparent;
+    color:var(--text);
+    cursor:pointer;
+    text-decoration:none;
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    transition:all .15s ease;
+  }
+  .btn:hover{border-color:var(--text-faint);}
+  .btn.primary{background:var(--crimson); border-color:var(--crimson); color:#fff;}
+  .btn.primary:hover{background:#c93e42;}
+
+  footer{
+    padding:30px 6vw 50px;
+    border-top:1px solid var(--line);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--text-faint);
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+
+  @media (max-width: 560px){
+    header.hero{padding:36px 5vw 28px;}
+    .controls{padding:12px 5vw;}
+    main{padding:24px 5vw 60px;}
+    .grid{grid-template-columns:repeat(auto-fill, minmax(136px, 1fr)); gap:10px;}
+    .hero-headline{flex-direction:column; gap:6px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-top">
+    <div class="brand">
+      <div class="brand-mark"></div>
+      <div>
+        <div class="brand-name">Prasaran</div>
+        <div class="brand-sub">प्रसारण · nepali tv, live</div>
+      </div>
+    </div>
+    <div class="hero-meta">
+      built from an M3U playlist<br>
+      channel data <strong>updates when the source list is refreshed</strong>
+    </div>
+  </div>
+
+  <div class="hero-headline">
+    <div class="hero-count" id="heroCount">347</div>
+    <div class="hero-headline-text">
+      channels, one page. Search by name, filter by category, and <em>press play</em> — no app, no login.
+    </div>
+  </div>
+</header>
+
+<div class="controls">
+  <div class="search-row">
+    <div class="search-box">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="searchInput" placeholder="Search channels — Kantipur, News, Sports…" autocomplete="off">
+    </div>
+    <div class="result-count"><strong id="resultCount">347</strong> shown</div>
+  </div>
+  <div class="chips" id="chips"></div>
+</div>
+
+<main>
+  <div class="grid" id="grid"></div>
+</main>
+
+<footer>
+  <span>Prasaran — a self-hosted playlist viewer. Not affiliated with any broadcaster.</span>
+  <span id="footStamp"></span>
+</footer>
+
+<div class="modal-backdrop" id="modalBackdrop">
+  <div class="modal">
+    <div class="modal-head">
+      <div class="modal-title">
+        <img id="modalLogo" src="" alt="" onerror="this.style.display='none'">
+        <span id="modalName"></span>
+      </div>
+      <button class="modal-close" id="modalClose">&times;</button>
+    </div>
+    <div class="modal-stage" id="modalStage"></div>
+    <div class="modal-actions">
+      <a class="btn primary" id="openTabBtn" href="#" target="_blank" rel="noopener">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Open stream in new tab
+      </a>
+      <button class="btn" id="retryBtn">Retry inline</button>
+      <a class="btn" id="copyLinkBtn" href="#">Copy stream link</a>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/hls.js@1/dist/hls.min.js"></script>
+<script src="channels_data.js"></script>
+<script>
+/*
+ * OPTIONAL: if you later deploy your own proxy (see worker.js /
+ * SETUP.md), paste its URL here and it'll be tried first — it's
+ * more reliable than the public proxies below. Leave blank to rely
+ * entirely on the public proxies, which need no setup at all.
+ * e.g. "https://prasaran-proxy.yoursubdomain.workers.dev"
+ */
+const OWN_PROXY_URL = "";
+
+/*
+ * Public CORS proxies, tried in order, no account or deployment
+ * needed. They're free third-party services, so expect occasional
+ * slowness or downtime — that's the trade-off for zero setup. If
+ * you want something sturdier later, deploy worker.js (see SETUP.md).
+ */
+const PUBLIC_PROXIES = [
+  (u) => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
+  (u) => `https://corsproxy.io/?url=${encodeURIComponent(u)}`,
+  (u) => `https://thingproxy.freeboard.io/fetch/${u}`,
+];
+
+function candidateProxies(url){
+  const list = [];
+  if (OWN_PROXY_URL) list.push(`${OWN_PROXY_URL}?url=${encodeURIComponent(url)}`);
+  PUBLIC_PROXIES.forEach(fn => list.push(fn(url)));
+  return list;
+}
+
+// Rewrite an .m3u8 playlist so every segment / sub-playlist / key URI
+// also routes through a proxy, resolved against the manifest's own URL.
+function rewritePlaylist(text, baseUrl, proxyFn){
+  const base = new URL(baseUrl);
+  return text.split('\n').map(line => {
+    const trimmed = line.trim();
+    if (!trimmed) return line;
+    if (trimmed.startsWith('#')){
+      if (trimmed.startsWith('#EXT-X-KEY') || trimmed.startsWith('#EXT-X-MAP')){
+        return line.replace(/URI="([^"]+)"/, (_m, uri) => {
+          const abs = new URL(uri, base).href;
+          return `URI="${proxyFn(abs)}"`;
+        });
+      }
+      return line;
+    }
+    const abs = new URL(trimmed, base).href;
+    return proxyFn(abs);
+  }).join('\n');
+}
+
+// A custom hls.js loader: fetches through a working proxy (retrying
+// the next candidate on failure), and rewrites playlists in-browser
+// so segments/keys/sub-playlists are proxied too, not just the manifest.
+let workingProxyFn = null;
+
+class ProxyLoader {
+  constructor(){ this.aborted = false; }
+  load(context, config, callbacks){
+    this.context = context;
+    this.callbacks = callbacks;
+    const isPlaylist = /\.m3u8($|\?)/.test(context.url) || context.type === 'manifest' || context.type === 'level';
+
+    const proxyFns = workingProxyFn
+      ? [workingProxyFn, ...PUBLIC_PROXIES.map((fn, i) => fn).filter(fn => fn !== workingProxyFn)]
+      : (OWN_PROXY_URL ? [(u) => `${OWN_PROXY_URL}?url=${encodeURIComponent(u)}`, ...PUBLIC_PROXIES] : PUBLIC_PROXIES);
+
+    this._tryChain(context.url, proxyFns, 0, isPlaylist, config, callbacks);
+  }
+
+  async _tryChain(url, proxyFns, idx, isPlaylist, config, callbacks){
+    if (this.aborted) return;
+    if (idx >= proxyFns.length){
+      callbacks.onError({ code: 0, text: 'All proxies failed' }, this.context, null, {});
+      return;
+    }
+    const proxyFn = proxyFns[idx];
+    const proxiedUrl = typeof proxyFn === 'function' ? proxyFn(url) : proxyFn;
+    const start = performance.now();
+    try{
+      const resp = await fetch(proxiedUrl);
+      if (!resp.ok) throw new Error('HTTP ' + resp.status);
+
+      let data;
+      if (isPlaylist){
+        let text = await resp.text();
+        if (!text.trim().startsWith('#EXTM3U')) throw new Error('Not a playlist');
+        text = rewritePlaylist(text, url, proxyFn);
+        data = text;
+      } else {
+        data = await resp.arrayBuffer();
+      }
+
+      workingProxyFn = proxyFn; // remember what worked for subsequent segment loads
+      const loaded = data.byteLength ?? data.length;
+      const stats = {
+        aborted: false, loaded, total: loaded, retry: 0,
+        chunkCount: 1, bwEstimate: 0,
+        loading: { start, first: performance.now(), end: performance.now() },
+        parsing: { start: 0, end: 0 }, buffering: { start: 0, first: 0, end: 0 },
+      };
+      callbacks.onSuccess({ url: proxiedUrl, data }, stats, this.context, resp);
+    } catch(e){
+      this._tryChain(url, proxyFns, idx + 1, isPlaylist, config, callbacks);
+    }
+  }
+
+  abort(){ this.aborted = true; }
+  destroy(){ this.aborted = true; }
+}
+
+document.getElementById('footStamp').textContent = new Date().toISOString().slice(0,10);
+
+const grid = document.getElementById('grid');
+const chipsEl = document.getElementById('chips');
+const searchInput = document.getElementById('searchInput');
+const resultCount = document.getElementById('resultCount');
+const heroCount = document.getElementById('heroCount');
+
+heroCount.textContent = CHANNELS.length;
+
+// Build category counts, "All" first
+const catCounts = {};
+CHANNELS.forEach(c => { catCounts[c.category] = (catCounts[c.category]||0) + 1; });
+const cats = ['All', ...Object.keys(catCounts).sort((a,b) => catCounts[b]-catCounts[a])];
+
+let activeCat = 'All';
+let query = '';
+
+function renderChips(){
+  chipsEl.innerHTML = '';
+  cats.forEach(cat => {
+    const btn = document.createElement('button');
+    btn.className = 'chip' + (cat === activeCat ? ' active' : '');
+    const count = cat === 'All' ? CHANNELS.length : catCounts[cat];
+    btn.innerHTML = `${cat}<span class="n">${count}</span>`;
+    btn.onclick = () => { activeCat = cat; renderChips(); renderGrid(); };
+    chipsEl.appendChild(btn);
+  });
+}
+
+const BAR_COLORS = ['#e14a4f','#e8a33d','#4a5cc9','#3fae6a','#c9506e','#7a5fd0','#d68f3c'];
+function colorsFor(name){
+  let h = 0;
+  for (let i=0;i<name.length;i++) h = (h*31 + name.charCodeAt(i)) >>> 0;
+  const a = BAR_COLORS[h % BAR_COLORS.length];
+  const b = BAR_COLORS[(h >> 3) % BAR_COLORS.length];
+  const c = BAR_COLORS[(h >> 6) % BAR_COLORS.length];
+  return [a,b,c];
+}
+
+function testCardHTML(name){
+  const [a,b,c] = colorsFor(name);
+  const letter = (name.trim()[0] || '?').toUpperCase();
+  return `<div class="testcard">
+    <div class="bars"><span style="background:${a}"></span><span style="background:${b}"></span><span style="background:${c}"></span><span style="background:${a}"></span><span style="background:${b}"></span></div>
+    <div class="initial">${letter}</div>
+  </div>`;
+}
+
+function cardHTML(ch, i){
+  const logoBlock = ch.logo
+    ? `<img src="${ch.logo}" alt="${ch.name}" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('div'),{innerHTML:\`${testCardHTML(ch.name).replace(/`/g,'')}\`,style:'width:100%;height:100%;position:absolute;inset:0'}).firstChild)">`
+    : testCardHTML(ch.name);
+  return `
+  <div class="card" style="animation-delay:${Math.min(i*12,300)}ms" data-idx="${i}">
+    <div class="card-art">
+      ${logoBlock}
+      <div class="card-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+    </div>
+    <div class="card-body">
+      <div class="card-name">${ch.name}</div>
+      <div class="card-cat">${ch.category}</div>
+    </div>
+  </div>`;
+}
+
+function renderGrid(){
+  const q = query.trim().toLowerCase();
+  const filtered = CHANNELS.filter(c => {
+    if (activeCat !== 'All' && c.category !== activeCat) return false;
+    if (q && !c.name.toLowerCase().includes(q)) return false;
+    return true;
+  });
+  resultCount.textContent = filtered.length;
+
+  if (!filtered.length){
+    grid.innerHTML = `<div class="empty-state"><div class="big">No channels match</div>try a different search or category</div>`;
+    return;
+  }
+
+  grid.innerHTML = filtered.map((ch, i) => cardHTML(ch, i)).join('');
+  [...grid.querySelectorAll('.card')].forEach((el, i) => {
+    el.addEventListener('click', () => openModal(filtered[i]));
+  });
+}
+
+searchInput.addEventListener('input', e => { query = e.target.value; renderGrid(); });
+
+// ---------- Modal / player ----------
+const backdrop = document.getElementById('modalBackdrop');
+const modalStage = document.getElementById('modalStage');
+const modalName = document.getElementById('modalName');
+const modalLogo = document.getElementById('modalLogo');
+const openTabBtn = document.getElementById('openTabBtn');
+const copyLinkBtn = document.getElementById('copyLinkBtn');
+const retryBtn = document.getElementById('retryBtn');
+let currentChannel = null;
+let hlsInstance = null;
+
+function openModal(ch){
+  currentChannel = ch;
+  modalName.textContent = ch.name;
+  modalLogo.style.display = ch.logo ? '' : 'none';
+  modalLogo.src = ch.logo || '';
+  openTabBtn.href = ch.url;
+  backdrop.classList.add('open');
+  attemptPlay(ch);
+}
+
+function closeModal(){
+  backdrop.classList.remove('open');
+  if (hlsInstance){ hlsInstance.destroy(); hlsInstance = null; }
+  modalStage.innerHTML = '';
+}
+
+function attemptPlay(ch){
+  if (hlsInstance){ hlsInstance.destroy(); hlsInstance = null; }
+  modalStage.innerHTML = `<div class="stage-msg"><div class="glyph">◌</div>connecting to stream…</div>`;
+
+  const video = document.createElement('video');
+  video.controls = true;
+  video.autoplay = true;
+  video.playsInline = true;
+
+  const showFallback = () => {
+    modalStage.innerHTML = `<div class="stage-msg">
+      <div class="glyph">⚠</div>
+      This stream didn't load inline — the public proxies this site relies on may be slow, rate-limited, or down right now, or this channel's own upstream link is dead.<br><br>
+      Try "Retry inline" once, or use "Open stream in new tab" below.
+    </div>`;
+  };
+
+  try{
+    if (window.Hls && Hls.isSupported()){
+      hlsInstance = new Hls({ maxBufferLength: 20, loader: ProxyLoader });
+      hlsInstance.on(Hls.Events.ERROR, (evt, data) => { if (data.fatal) showFallback(); });
+      hlsInstance.loadSource(ch.url);
+      hlsInstance.attachMedia(video);
+      modalStage.innerHTML = '';
+      modalStage.appendChild(video);
+    } else {
+      showFallback();
+    }
+  } catch(e){
+    showFallback();
+  }
+}
+
+retryBtn.addEventListener('click', () => { if (currentChannel) attemptPlay(currentChannel); });
+copyLinkBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  if (!currentChannel) return;
+  navigator.clipboard?.writeText(currentChannel.url).then(() => {
+    copyLinkBtn.textContent = 'Copied';
+    setTimeout(() => copyLinkBtn.textContent = 'Copy stream link', 1400);
+  });
+});
+
+document.getElementById('modalClose').addEventListener('click', closeModal);
+backdrop.addEventListener('click', (e) => { if (e.target === backdrop) closeModal(); });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+renderChips();
+renderGrid();
+</script>
+</body>
+</html>
